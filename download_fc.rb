@@ -43,8 +43,8 @@ File.open('firstclass_inbox.txt', 'w') do |f|
 			f.puts message.content+"\n" unless message.nil?
 			f.puts ('-'*100)+"\n"
 		end
-		page = page.link_with(text: 'Next Page').click
 		break if !page.link_with(text: 'Next Page')
+		page = page.link_with(text: 'Next Page').click
 	end
 end
 
