@@ -22,7 +22,6 @@ page = page.link_with(text: 'Mailbox').click
 puts "Downloading messages. This could take a while..."
 File.open('firstclass_inbox.txt', 'w') do |f|
 	loop do
-		page = page.link_with(text: 'Next Page').click
 		page.links_with(text: 'Message').each do |link|
 			message_page = link.click
 
@@ -44,7 +43,8 @@ File.open('firstclass_inbox.txt', 'w') do |f|
 			f.puts message.content+"\n" unless message.nil?
 			f.puts ('-'*100)+"\n"
 		end
-		break unless page.link_with(text: 'Next Page')
+		page = page.link_with(text: 'Next Page').click
+		break if !page.link_with(text: 'Next Page')
 	end
 end
 
